@@ -1,0 +1,22 @@
+name: Flake8
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+      - name: Install flake8, flake8-docstrings, and flake8-import-order
+        run: pip install flake8 flake8-docstrings flake8-import-order via pip
+      - name: Check Python script by flake8
+        run: flake8 --show-source --statistics python_script
